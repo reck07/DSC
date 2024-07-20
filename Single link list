@@ -1,0 +1,66 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct node 
+{
+int data;
+struct node *next;
+};
+struct node *head,*newnode,*temp;
+
+void create()
+{
+int n;
+printf("Enter the element");
+scanf("%d",&n);
+head=(struct node *) malloc(sizeof (struct node));
+head->data=n;
+head->next=NULL;
+temp=head;
+while(temp->data != 0)
+{
+scanf("%d",&n);
+newnode=(struct node *) malloc(sizeof (struct node));
+newnode->data=n;
+newnode->next=NULL;
+temp->next=newnode;
+temp=temp->next;
+}}
+
+void display()
+{
+if (head==NULL)
+printf ("List does not exist ");
+else
+{
+temp=head;
+while(temp->next != NULL)
+{
+printf("%d ",temp->data);
+temp=temp->next;
+}}}
+
+int main()
+{
+int choice;
+while(1)
+{
+printf("\n1->create ");
+printf("\n2->Display "); 
+printf("\n3->Ends ");
+printf("\nEnter choice ");
+scanf("%d",&choice);
+switch(choice)
+{
+case 1:
+create();
+break;
+case 2:
+display();
+break;
+case 3:
+return 0;
+default:
+printf("Invalid choice ");
+}
+}
+}
