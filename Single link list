@@ -1,66 +1,108 @@
-#include<stdio.h>
-#include<stdlib.h>
-struct node 
-{
-int data;
-struct node *next;
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node* next;
 };
-struct node *head,*newnode,*temp;
 
-void create()
-{
-int n;
-printf("Enter the element");
-scanf("%d",&n);
-head=(struct node *) malloc(sizeof (struct node));
-head->data=n;
-head->next=NULL;
-temp=head;
-while(temp->data != 0)
-{
-scanf("%d",&n);
-newnode=(struct node *) malloc(sizeof (struct node));
-newnode->data=n;
-newnode->next=NULL;
-temp->next=newnode;
-temp=temp->next;
-}}
+struct node* head = NULL;
+struct node* newnode;
+struct node* temp;
 
-void display()
-{
-if (head==NULL)
-printf ("List does not exist ");
-else
-{
-temp=head;
-while(temp->next != NULL)
-{
-printf("%d ",temp->data);
-temp=temp->next;
-}}}
-
-int main()
-{
-int choice;
-while(1)
-{
-printf("\n1->create ");
-printf("\n2->Display "); 
-printf("\n3->Ends ");
-printf("\nEnter choice ");
-scanf("%d",&choice);
-switch(choice)
-{
-case 1:
-create();
-break;
-case 2:
-display();
-break;
-case 3:
-return 0;
-default:
-printf("Invalid choice ");
+void create() {
+    int n;
+    printf("Enter elements (enter 0 to stop):\n");
+    scanf("%d", &n);
+    if (n == 0) {
+        printf("Empty list created.\n");
+        return;
+    }
+    head = (struct node*)malloc(sizeof(struct node));
+    head->data = n;
+    head->next = NULL;
+    temp = head;
+    while (1) {
+        scanf("%d", &n);
+        if (n == 0)
+            break;
+        newnode = (struct node*)malloc(sizeof(struct node));
+        newnode->data = n;
+        newnode->next = NULL;
+        temp->next = newnode;
+        temp = temp->next;
+    }
 }
+
+void insertback() {
+    int n;
+    if (head == NULL)
+        printf("List does not exist.\n");
+    else {
+        printf("Enter the element to insert at the back: ");
+        scanf("%d", &n);
+        newnode = (struct node*)malloc(sizeof(struct node));
+        newnode->data = n;
+        newnode->next = NULL;
+        temp = head;
+        while (temp->next != NULL) {
+            temp = temp->next;
+        }
+        temp->next = newnode;
+    }
 }
+
+void display() {
+    if (head == NULL)
+        printf("List is empty.\n");
+    else {
+        temp = head;
+        printf("Linked list elements: ");
+        while (temp != NULL) {
+            printf("%d ", temp->data);
+            temp = temp->next;
+        }
+        printf("\n");
+    }
+}
+
+void insertfront() {
+    int n;
+    printf("Enter the element to insert at the front: ");
+    scanf("%d", &n);
+    newnode = (struct node*)malloc(sizeof(struct node));
+    newnode->data = n;
+    newnode->next = head;
+    head = newnode;
+}
+
+int main() {
+    int choice;
+    while (1) {
+        printf("\n1. Create a linked list\n");
+        printf("2. Insert at the front\n");
+        printf("3. Insert at the back\n");
+        printf("4. Display the list\n");
+        printf("5. Exit\n");
+        printf("Enter your choice: ");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+                create();
+                break;
+            case 2:
+                insertfront();
+                break;
+            case 3:
+                insertback();
+                break;
+            case 4:
+                display();
+                break;
+            case 5:
+                return 0;
+            default:
+                printf("Invalid choice. Please try again.\n");
+        }
+    }
 }
