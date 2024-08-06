@@ -5,10 +5,7 @@ struct node {
     int data;
     struct node* next;
 };
-
-struct node* head = NULL;
-struct node* newnode;
-struct node* temp;
+struct node *head,*prev,*newnode,*temp;
 
 void create() {
     int n;
@@ -68,6 +65,10 @@ void display() {
 
 void insertfront() {
     int n;
+    if(head==NULL)
+    printf("list does not exist");
+else
+{
     printf("Enter the element to insert at the front: ");
     scanf("%d", &n);
     newnode = (struct node*)malloc(sizeof(struct node));
@@ -75,6 +76,30 @@ void insertfront() {
     newnode->next = head;
     head = newnode;
 }
+}
+
+void insertpos() {
+    int,pos;
+    if(head==NULL)
+    printf("list does not exist");
+    else
+    {
+    printf("enter the position");
+    scanf("%d",&n);
+    printf("enter position");
+    scanf("%d",&pos);
+    newnode=(struct node*)malloC(sizeof(struct node));
+    temp=head;
+    while(temp->data!=pos)
+    {    
+    prev=temp;
+    temp=temp->next;
+    }
+    newnode->data=n;
+    prev->next=newnode;
+    newnode->next=temp;
+    }
+    }
 
 int main() {
     int choice;
@@ -95,6 +120,9 @@ int main() {
                 break;
             case 3:
                 insertback();
+                break;
+            case 4:
+                insertpos();
                 break;
             case 4:
                 display();
