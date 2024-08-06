@@ -79,16 +79,16 @@ else
 }
 
 void insertpos() {
-    int,pos;
+    int pos,n;
     if(head==NULL)
     printf("list does not exist");
     else
     {
-    printf("enter the position");
+    printf("enter the element");
     scanf("%d",&n);
     printf("enter position");
     scanf("%d",&pos);
-    newnode=(struct node*)malloC(sizeof(struct node));
+    newnode=(struct node*)malloc(sizeof(struct node));
     temp=head;
     while(temp->data!=pos)
     {    
@@ -107,27 +107,32 @@ int main() {
         printf("\n1. Create a linked list\n");
         printf("2. Insert at the front\n");
         printf("3. Insert at the back\n");
-        printf("4. Display the list\n");
-        printf("5. Exit\n");
+        printf("4. insert pos\n");
+        printf("5. Display the list\n");
+        printf("6. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
         switch (choice) {
             case 1:
                 create();
+                display();
                 break;
             case 2:
                 insertfront();
+                display();
                 break;
             case 3:
                 insertback();
+                display();
                 break;
             case 4:
                 insertpos();
-                break;
-            case 4:
                 display();
                 break;
             case 5:
+                display();
+                break;
+            case 6:
                 return 0;
             default:
                 printf("Invalid choice. Please try again.\n");
