@@ -1,0 +1,79 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node {
+    int data;
+    struct node *next;
+};
+
+struct node *head = NULL, *temp, *newnode, *prev;
+
+void create() {
+    int n;
+    printf("Enter the element (0 to end): ");
+    scanf("%d", &n);
+    if (n == 0) return;
+    
+    head = (struct node *)malloc(sizeof(struct node));
+    head->data = n;
+    head->next = head;
+    temp = head;
+    
+    while (1) {
+        scanf("%d", &n);
+        if (n == 0) break;
+        
+        newnode = (struct node *)malloc(sizeof(struct node));
+        newnode->data = n;
+        newnode->next = head;
+        
+        temp->next = newnode;
+        temp = temp->next;
+    }
+}
+
+void display() {
+    if (head == NULL) {
+        printf("List does not exist\n");
+        return;
+    }
+    
+    temp = head;
+    do {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    } while (temp != head);
+    printf("\n");
+}
+
+void insertfirst(int n) {
+    newnode = (struct node *)malloc(sizeof(struct node));
+    newnode->data = n;
+    newnode->next = head;
+    
+    if (head == NULL) {
+        head = newnode;
+        head->next = head;
+    } else {
+        temp = head;
+        while (temp->next != head) {
+            temp = temp->next;
+        }
+        temp->next = newnode;
+        head = newnode;
+    }
+}
+
+int main() {
+    create();
+    display();
+    
+    int n;
+    printf("Enter the element to insert at the beginning: ");
+    scanf("%d", &n);
+    insertfirst(n);
+    display();
+    
+    return 0;
+}
+
