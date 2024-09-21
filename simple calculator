@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+void main() {
+    int i, j, result;
+    char op;
+    printf("Enter two numbers and an operator (e.g., 5+3): ");
+    scanf("%d %c %d", &i, &op, &j);
+
+    switch(op) {
+        case '+':
+            result = i + j;
+            break;
+        case '-':
+            result = i - j;
+            break;
+        case '/':
+            if (j != 0) {
+                result = i / j;
+            } else {
+                printf("Error: Division by zero\n");
+                return;
+            }
+            break;
+        case '*':
+            result = i * j;
+            break;
+        case '%':
+            if (j != 0) {
+                result = i % j;
+            } else {
+                printf("Error: Division by zero\n");
+                return;
+            }
+            break;
+        default:
+            printf("Invalid operator\n");
+            return;
+    }
+
+    printf("The result of %d %c %d is %d\n", i, op, j, result);
+}
